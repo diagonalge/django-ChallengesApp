@@ -10,7 +10,7 @@ challenges = {
     "january": "Dont eat meat for 30 days",
     "february": "Pray 5 times a day for 30 days",
     "march": "Walk for 30 minutes everyday",
-    "april": "ast for 1 day after every 2 days",
+    "april": "Fast for 1 day after every 2 days",
     "may": "Run for 1 mile a day",
     "june": "Dont swear for 30 days",
     "july": "Give $5 to charity everyday",
@@ -20,6 +20,18 @@ challenges = {
     "november": "Pray 5 times with congregation",
     "december": "Run for 2 miles everyday"
 }
+
+def index(request):
+    months = list(challenges.keys())
+    list_items = ""
+    for month in months:
+        caps = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href = \"{month_path}\"><h1>{caps}</h1></a></li>"
+
+    res_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(res_data)
+
 
 def monthly_challenge_num(request, month):
     months = list(challenges.keys())
