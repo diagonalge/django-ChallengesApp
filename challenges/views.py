@@ -44,8 +44,12 @@ def monthly_challenge_num(request, month):
 
 def monthly_challenge(request, month):
     challenge_text = ""
+    caps = str(month).capitalize()
     try:
         challenge_text = challenges[month]
     except:
         return HttpResponseNotFound("Invalid Month")
-    return HttpResponse(challenge_text)
+    return render(request, "challenges/challenge.html", {
+        "text": challenge_text,
+        "month": caps
+    })
